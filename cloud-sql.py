@@ -4,8 +4,6 @@ from subprocess import call
 import shutil
 ####Terraform python package does not provide auto-approve functionality. So we are using terraform commands directly.
 
-shutil.copy2('main.tf_privatecon','main.tf')
-
 def tf_apply():
     call("terraform apply -auto-approve", shell=True)
 
