@@ -21,6 +21,12 @@ variable "tier" {
 }
 
 
+provider "google-beta" {
+  credentials = file("account.json")
+  project     = var.project
+  region      = var.region
+}
+
 provider "google" {
   credentials = file("account.json")
   project     = var.project
@@ -66,10 +72,12 @@ resource "random_id" "db_name_suffix" {
 }
 
 resource "google_sql_database_instance" "gcp-cloud-sql" {
+  provider = google-beta
   project = var.project
   name   = "${var.cloudsqlname}-${random_id.db_name_suffix.hex}"
   region = var.region
   database_version = var.dbversion
+  root_password = "root"
   depends_on = [ 
     google_service_networking_connection.private_vpc_connection,
     google_project_service.networking,

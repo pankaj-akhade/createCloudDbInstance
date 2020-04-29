@@ -1,0 +1,5 @@
+project = "flow-on-k8s-test"
+region = "us-east1"
+cloudsqlname = "mssql-db"
+tier = "db-custom-1-3840"
+dbversion = "SQLSERVER_2017_STANDARD"
