@@ -4,9 +4,10 @@ variable "project" {
 
 variable "region" {
   type = string
+  default = "us-east1"
 }
 
-variable "cloudsqlname" {
+variable "dbname" {
   type = string
 }
 
@@ -71,13 +72,17 @@ resource "random_id" "db_name_suffix" {
   byte_length = 4
 }
 
+resource "random_id" "db_root_paas_suffix" {
+  byte_length = 8
+}
+
 resource "google_sql_database_instance" "gcp-cloud-sql" {
   provider = google-beta
   project = var.project
-  name   = "${var.cloudsqlname}-${random_id.db_name_suffix.hex}"
+  name   = "${var.dbname}-${random_id.db_name_suffix.hex}"
   region = var.region
   database_version = var.dbversion
-  root_password = "root"
+  root_password = random_id.db_root_paas_suffix.hex
   depends_on = [ 
     google_service_networking_connection.private_vpc_connection,
     google_project_service.networking,
@@ -108,10 +113,6 @@ resource "kubernetes_secret" "google-sql-secret" {
   data = {
     "sql_endpoint" = google_sql_database_instance.gcp-cloud-sql.private_ip_address
   }
-}
-
-output "db_name" {
-  value       = google_sql_database_instance.gcp-cloud-sql.name
 }
 
 output "db_private_ip" {

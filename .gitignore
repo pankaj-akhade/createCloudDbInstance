@@ -1,2 +1,7 @@
 terraform.tfstate*
 .terraform/*
+.idea/
+aws/
+gcp/
+venv/
+

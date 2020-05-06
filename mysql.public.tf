@@ -6,7 +6,7 @@ variable "region" {
   type = string
 }
 
-variable "cloudsqlname" {
+variable "dbname" {
   type = string
 }
 
@@ -44,7 +44,7 @@ resource "random_id" "db_name_suffix" {
 }
 
 resource "google_sql_database_instance" "gcp-cloud-sql" {
-  name             = "${var.cloudsqlname}-${random_id.db_name_suffix.hex}"
+  name             = "${var.dbname}-${random_id.db_name_suffix.hex}"
   database_version = var.dbversion
   region           = var.region
 
@@ -81,10 +81,6 @@ resource "kubernetes_secret" "google-sql-secret" {
   data = {
     "sql_endpoint" = google_sql_database_instance.gcp-cloud-sql.public_ip_address
   }
-}
-
-output "db_name" {
-  value       = google_sql_database_instance.gcp-cloud-sql.name
 }
 
 output "db_public_ip" {
