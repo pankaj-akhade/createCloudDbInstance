@@ -13,7 +13,7 @@ usage: createDbInstance.py [-h] --cloud CLOUD --dbType DBTYPE --engine ENGINE
 
 This script is used to spin up database instances in AWS/GCP
 
-optional arguments
+optional arguments:
   -h, --help            show this help message and exit
   --cloud CLOUD         Cloud vendor eg. aws/gcp
   --dbType DBTYPE       dbType i.e. oracle/mysql/mssql
