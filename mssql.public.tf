@@ -86,15 +86,6 @@ resource "google_sql_user" "users" {
   project = var.project
 }
 
-resource "kubernetes_secret" "google-sql-secret" {
-  metadata {
-    name = "gcp-sql-endpoint"
-  }
-  data = {
-    "sql_endpoint" = google_sql_database_instance.gcp-cloud-sql.public_ip_address
-  }
-}
-
 output "db_public_ip" {
   value       = google_sql_database_instance.gcp-cloud-sql.public_ip_address
 }
