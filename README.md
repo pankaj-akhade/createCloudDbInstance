@@ -44,4 +44,4 @@ optional arguments:
   python createDbInstance.py --cloud gcp --dbType <mysql|mssql> --engine <mysql|mssql> --region <region> --dbname <dbName> --tier <instance-class> --dbversion <dbversion> --create --private --project <Project>
   
   AWS:
-  python createDbInstance.py --cloud aws --dbType <mssql|oracle> --engine <sqlserver-se|oracle-se|etc> --region <region> --dbname <dbName> --vpcId <vpc-id> --user <user> --password <password> --tier <instance-class> --dbversion <dbversion> --publicAccess --create
+  python createDbInstance.py --cloud aws --dbType <mssql|oracle> --engine <sqlserver-se|oracle-se|etc.> --region <region> --dbname <dbName> --vpcId <vpc-id> --user <user> --password <password> --tier <instance-class> --dbversion <dbversion> --publicAccess --create
